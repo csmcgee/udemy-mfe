@@ -10,6 +10,9 @@ const generateClassName = createGenerateClassName({
   productionPrefix: 'ma',
 });
 
+// TODO: refactor routing when vus is in to redefine routing interface
+// NOTE container is telling MFE that initial load is change in path to /
+/// Shouldn't container dictate what MFE thinks the route is instead of browser url?
 export default ({history}) => {
 
   return (

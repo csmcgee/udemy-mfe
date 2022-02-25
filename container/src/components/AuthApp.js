@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from 'react';
-import { mount } from 'marketing/MarketingApp';
-import { useNavigate, useLocation, useHistory } from 'react-router-dom';
+import { mount } from 'auth/AuthApp';
 
-export default () => {
+import React, { useRef, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+export default ({ onSignIn }) => {
   const ref = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -11,12 +12,12 @@ export default () => {
   const { render, onParentNavigate } = mount({
     // when navigation occurs, this callback sent to mfe allows mfe
     // to make container navigate
-    onNavigate: ({_, location: { pathname: nextPathName }}) => {
+    onNavigate: ({action, location: { pathname: nextPathName }}) => {
       if (location.pathname !== nextPathName) {
-        console.log("we have to navigate to", nextPathName);
         navigate(nextPathName);
       }
     },
+    onSignIn,
   });
 
   useEffect(() => {
